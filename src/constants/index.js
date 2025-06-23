@@ -26,10 +26,10 @@ const words = [
 ];
 
 const counterItems = [
-  { value: 1, suffix: "+", label: "Years of Experience" },
-  { value: 200, suffix: "+", label: "Satisfied Clients" },
-  { value: 108, suffix: "+", label: "Completed Projects" },
-  { value: 90, suffix: "%", label: "Client Retention Rate" },
+  { value: "100%", suffix: "", label: "Dedication to Every Project" },
+  { value: "10+", suffix: "", label: "Personal Projects Built" },
+{ value: "Always", suffix: "", label: "Curious to Learn More" },
+  { value: "∞", suffix: "", label: "Passion for Web Development" },
 ];
 
 const logoIconsList = [
@@ -38,9 +38,6 @@ const logoIconsList = [
   },
   {
     imgPath: "/images/logos/company-logo-2.png",
-  },
-  {
-    imgPath: "/images/logos/company-logo-3.png",
   },
   {
     imgPath: "/images/logos/company-logo-4.png",

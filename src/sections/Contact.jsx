@@ -1,42 +1,43 @@
-import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
-
+import { useState } from "react";
 import TitleHeader from "../components/TitleHeader";
 import ContactExperience from "../components/models/contact/ContactExperience";
 
+const TELEGRAM_USERNAME = "adilhan200"; // Замените на ваш Telegram username
+
 const Contact = () => {
-  const formRef = useRef(null);
-  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true); // Show loading state
 
-    try {
-      await emailjs.sendForm(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      );
+    setLoading(true);
 
-      // Reset form and stop loading
-      setForm({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.error("EmailJS Error:", error); // Optional: show toast
-    } finally {
-      setLoading(false); // Always stop loading, even on error
-    }
+    // Формируем сообщение для Telegram
+    const telegramMessage = `Hi! My name is ${form.name}. My email: ${form.email}. ${form.message}`;
+
+    // Кодируем текст для URL
+    const encodedMessage = encodeURIComponent(telegramMessage);
+
+    // Ссылка на Telegram с предзаполненным сообщением
+    const telegramLink = `https://t.me/${TELEGRAM_USERNAME}?text=${encodedMessage}`;
+
+    // Перенаправляем пользователя в Telegram
+    window.open(telegramLink, "_blank");
+
+    setLoading(false);
+
+    // Можно очистить форму или оставить данные
+    setForm({ name: "", email: "", message: "" });
   };
 
   return (
@@ -50,7 +51,6 @@ const Contact = () => {
           <div className="xl:col-span-5">
             <div className="flex-center card-border rounded-xl p-10">
               <form
-                ref={formRef}
                 onSubmit={handleSubmit}
                 className="w-full flex flex-col gap-7"
               >
@@ -93,12 +93,10 @@ const Contact = () => {
                   />
                 </div>
 
-                <button type="submit">
+                <button type="submit" disabled={loading}>
                   <div className="cta-button group">
                     <div className="bg-circle" />
-                    <p className="text">
-                      {loading ? "Sending..." : "Send Message"}
-                    </p>
+                    <p className="text">{loading ? "Redirecting..." : "Send via Telegram"}</p>
                     <div className="arrow-wrapper">
                       <img src="/images/arrow-down.svg" alt="arrow" />
                     </div>
