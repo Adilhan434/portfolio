@@ -120,7 +120,7 @@ const techStackIcons = [
     rotation: [0, 0, 0],
   },
   {
-    name: "Javascript Developer",
+    name: "Node js Developer",
     modelPath: "/models/node-transformed.glb",
     scale: 5,
     rotation: [0, -Math.PI / 2, 0],
@@ -155,7 +155,7 @@ const expCards = [
     review: "My contributions to Docker's web applications have been outstanding. I approache challenges with a problem-solving mindset.",
     imgPath: "/images/exp2.png",
     logoPath: "/images/logo2.png",
-    title: "Full Stack Developer",
+    title: "Backend Developer",
     date: "June 2020 - December 2023",
     responsibilities: [
       "Led the development of Docker's web applications, focusing on scalability.",
